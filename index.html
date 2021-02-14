@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <title>Cinema Collection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <!-- 自サイトのCSS -->
+  <link rel="stylesheet" href="main.css">
+
+</head>
+
+<body>
+  <!-- 最初のローディング表示 -->
+  <section id="loading" class="view">
+    <i class="initial-loading-icon fas fa-sync" aria-hidden="true"></i>
+  </section>
+  <!-- /#loading -->
+
+  <!-- ログイン画面 -->
+  <section id="login" class="view">
+    <div class="title-login">
+      <h1 class="title-login-h1">My Cinema Collection</h1>
+      <h3> 〜Let's Share〜</h3>
+    </div>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-sm-10 col-md-8 col-lg-6">
+          <form id="login-form">
+            <div class="form-group login__email">
+              <label for="login-email" class="col-form-label">
+                メールアドレス
+              </label>
+              <div>
+                <input id="login-email" type="email" class="form-control" required>
+              </div>
+            </div>
+            <div class="form-group login__password">
+              <label for="login-password" class="col-form-label">
+                パスワード
+              </label>
+              <div>
+                <input id="login-password" type="password" class="form-control" required>
+              </div>
+              <p>
+                <label for="js-passcheck">パスワードを表示する</label>
+                <input type="checkbox" id="js-passcheck" />
+              </p>
+              <p class="form-text text-white">
+                初めての方は、登録するパスワードを入力してください
+              </p>
+            </div>
+            <div id="login__help" class="alert alert-danger"></div>
+            <div class="form-group login__submit">
+              <div>
+                <button id="login__submit-button" type="submit" class="btn btn-success">
+                  ログイン
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /#login -->
+
+  <!-- 映画一覧画面 -->
+  <section id="movieshelf" class="view">
+    <header>
+      <div id="header">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+          <a class="navbar-brand" href="index.html"><img src="./images/top-logo.jpg" alt="cinema" width="100px" class="top-logo"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+              <li class="nav-item"><a href="#add-movie-modal" data-toggle="modal" class="add-button nav-link">
+                <i class="fas fa-plus-circle" aria-hidden="true"></i>
+                お気に入り映画の登録
+              </a></li>
+              <li class="nav-item"><a href="#share-movie-modal" data-toggle="modal" class="share-button nav-link">
+                <i class="fas fa-share" aria-hidden="true"></i>
+                シェアする
+              </a></li>
+              <li class="nav-item logout-button"><button class="btn btn-dark logout-button">
+                ログアウト
+              </button></li>
+             </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <div id="cover">
+      <h1 id="cover__title">My Cinema Collection</h1>
+    </div>
+    <div class="wrapper">
+      <div id="main">
+        <div id="movie-list" class="clearfix"></div>
+      </div>
+    </div>
+  </section>
+  <!-- /#movieshelf -->
+
+  <div id="movie-template">
+    <!-- 映画のテンプレート -->
+    <!--追加した入力項目の値を表示するための領域を作成する-->
+    <div class="movie-item">
+      <div class="movie-item__image-wrapper">
+        <a href="https://www.google.co.jp" target="_blank"><img src="" class="movie-item__image" alt=""></a>
+      </div>
+      <div class="movie-item__detail">
+        <div class="movie-item__title"></div>
+        <div class="movie-item__country"></div>
+        <div class="movie-item__genre"></div>
+        <div class="movie-item__rating"></div>
+        <!--<div class="movie-item__rating"></div>-->
+        <!--  <form method="get" action="https://www.google.co.jp">-->
+        <!--  <p><input type="search" name="q" size="30" placeholder="検索テキスト" required> <input type="submit" value="検索"></p>-->
+        <!--  </form>-->
+        <!--</div>  -->
+        <div class="movie-item__delete-wrapper">
+          <button class="btn btn-danger movie-item__delete">
+            <i class="fas fa-trash-alt" aria-hidden="true"></i>
+            削除
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- /.movie-item -->
+  </div>
+
+  <!-- 映画情報追加モーダル -->
+  <div id="add-movie-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">映画の登録</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span class="close-modal" aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body m-1">
+          <form id="movie-form">
+            <!-- TODO: 入力項目を追加する -->
+            <div class="form-group row">
+              <label for="add-movie-title" class="col-md-3  col-form-label">タイトル</label>
+              <div class="col-md-9">
+                <input id="add-movie-title" type="text" class="form-control" value="" placeholder="入力してください" required>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="add-movie-country" class="col-md-3  col-form-label"></label>
+              <div class="input-group col-md-9">
+                <select class="custom-select" id="add-movie-country">
+                    <option disabled selected value hidden>選択してください</option>
+                    <option value="邦画">邦画</option>
+                    <option value="洋画">洋画</option>
+                    <option value="韓流">韓流</option>
+                    <option value="その他">その他</option>
+                  </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="add-movie-genre" class="col-md-3  col-form-label">ジャンル</label>
+              <div class="input-group col-md-9">
+                <select class="custom-select" id="add-movie-genre">
+                    <option disabled selected value hidden>選択してください</option>
+                    <option value="アクション">アクション</option>
+                    <option value="SF">SF</option>
+                    <option value="サスペンス">サスペンス</option>
+                    <option value="コメディー">コメディー</option>
+                    <option value="ドラマ">ドラマ</option>
+                    <option value="ホラー">ホラー</option>
+                    <option value="恋愛">恋愛</option>
+                    <option value="音楽">音楽</option>
+                    <option value="アニメ">アニメ</option>
+                    <option value="その他">その他</option>
+                  </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-3 col-form-label">表紙画像</div>
+              <div class="col-md-9">
+                <div class="custom-file">
+                  <input id="add-movie-image" type="file" accept=".jpg,.jpeg,.png,.gif, image/jpeg,image/png,image/gif" class="custom-file-input" required url="./images/no-image.jpg">
+                  <!--required-->
+                  <!--ファイルを選択-->
+                  <label id="add-movie-image-label" class="custom-file-label" for="add-movie-image">
+                    ファイルを選択</label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="add-movie-rating" class="col-md-3  col-form-label">評価</label>
+              <div class="input-group col-md-9">
+                <select class="custom-select" id="add-movie-rating">
+                    <option disabled selected value hidden>選択してください</option>
+                    <option class="rating" data-rating="1" value="★">★</option>
+                    <option class="rating" data-rating="2" value="★★">★★</option>
+                    <option class="rating" data-rating="3" value="★★★">★★★</option>
+                    <option class="rating" data-rating="4" value="★★★★">★★★★</option>
+                    <option class="rating" data-rating="5" value="★★★★★">★★★★★</option>
+                  </select>
+              </div>
+            </div>
+            <!--<div class="form-group row">-->
+            <!--  <label for="add-movie-evaluation" class="col-md-3  col-form-label">評価</label>-->
+            <!--  <div class="col-md-3">評価</div>-->
+            <!--  <div class="col-md-9" id="movie-rating">-->
+            <!--    <span class="rating" data-rating="1">★</span>-->
+            <!--    <span class="rating" data-rating="2">★</span>-->
+            <!--    <span class="rating" data-rating="3">★</span>-->
+            <!--    <span class="rating" data-rating="4">★</span>-->
+            <!--    <span class="rating" data-rating="5">★</span>-->
+            <!--  </div>-->
+            <!--</div>-->
+            <div id="add-movie__help" class="alert alert-danger"></div>
+            <button id="submit_add_movie" type="submit" class="btn btn-default btn-success btn-block">
+              保存する
+            </button>
+          </form>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /#add-movie-modal -->
+
+  <div id="share-movie-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Please select</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body m-1">
+          <form id="movies-form">
+            <div class="form-group　row">
+              <label for="add-movie-title" class="col-md-4  col-form-label">
+                <a href="https://twitter.com/intent/tweet?text=おすすめです！是非観てみてください！" target="_blank" class="text">
+                  <i class="fab fa-twitter-square fa-5x icon" aria-hidden="true"></i>
+                </a>
+                <div class="twitter">
+                  <a href="https://twitter.com/intent/tweet?text=おすすめです！是非観てみてください！" target="_blank" class="text">
+                  twitter<br>に投稿する
+                  </a>
+                </div>
+              </label>
+              <label for="add-movie-title" class="col-md-4  col-form-label">
+                <a href="https://instagram.com/" target="_blank" class="text">
+                  <i class="fab fa-instagram fa-5x icon" aria-hidden="true"></i>
+                </a>
+                <div class="instagram"><a href="https://instagram.com/" target="_blank" class="text">
+                  Instagram<br>に投稿する</a></div>
+              </label>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Firebaseのセットアップコード（下記のSDKのバージョンは6.2.0） -->
+  <!-- The core Firebase JS SDK is always required and must be listed first 
+    (中心となるFirebase SDKです。常に必要で、最初に記述する必要があります) -->
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#config-web-app
+        (使いたいFirebaseサービス用のSDKを加えます) -->
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-storage.js"></script>
+
+  <!-- apiKeyなどは、ご自身の環境のものに合わせてください -->
+  <script>
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyA5iUqFVhpxe2ImEwVKcYvnQa8IIjz8sow",
+      authDomain: "realtime-chat-64e94.firebaseapp.com",
+      databaseURL: "https://realtime-chat-64e94-default-rtdb.firebaseio.com",
+      projectId: "realtime-chat-64e94",
+      storageBucket: "realtime-chat-64e94.appspot.com",
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+  <!-- Popper.js, 次に Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <script src="main.js"></script>
+
+  <!-- Font Awesome -->
+  <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"></script>
+</body>
+
+</html>

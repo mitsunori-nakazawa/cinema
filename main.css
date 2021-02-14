@@ -1,0 +1,307 @@
+@charset "UTF-8";
+
+/* すべての画面を最初は表示しない */
+.view {
+  display: none;
+}
+
+#cover {
+  text-align: center;
+}
+/**
+ * ------------------
+ * 最初のローディング表示
+ * ------------------
+ */
+#loading {
+  display: block;
+  position: relative;
+  height: 100vh;
+}
+
+.initial-loading-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -25px;
+  margin-left: -23px;
+  font-size: 46px;
+  animation: spin 2s linear infinite;
+}
+
+/* 回転するアニメーション */
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/**
+ * ----------
+ * ログイン画面
+ * ----------
+ */
+
+/*.container{*/
+/*  padding-top: 100px;*/
+/*}*/
+
+
+#login {
+  background-image: url('./images/login.jpg');
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+}
+
+.title-login {
+  padding-top: 50px;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  letter-spacing: 5px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.title-login-h1 {
+  font-size: 50px;
+}
+
+#login__help {
+  display: none;
+}
+
+
+
+.navbar {
+  width: 100%;
+}
+
+/**
+ * ----------
+ * 映画一覧画面
+ * ----------
+ */
+ 
+#movie-template {
+  display: none;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+#header {
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.add-button {
+  text-decoration: none;
+  color: #28a745;
+  font-size: 18px;
+}
+.add-button:hover {
+  text-decoration: none;
+  color: #1f8737;
+}
+.add-button:focus {
+  text-decoration: none;
+}
+
+/*シェアする*/
+.share-button {
+  text-decoration: none;
+  color: blue;
+  font-size: 18px;
+}
+.share-button:hover {
+  text-decoration: none;
+  color: #1e90ff;
+}
+.share-button:focus {
+  text-decoration: none;
+}
+
+#cover {
+  color: #f0f8ff;
+  width: 100%;
+  height: 300px;
+  background-color: #f0f8ff;
+  background-image: url("./images/movie.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+}
+
+#cover__title {
+  font-size: 45px;
+  letter-spacing: 10px;
+  text-shadow: 0 5px black;
+}
+
+#main {
+  width: 100%;
+  margin: 0 auto;
+}
+
+#movie-list {
+  margin: 20px auto;
+}
+
+.movie-item {
+  width: 270px;
+  margin: 15px;
+  float: left;
+  background-color: white;
+  border: solid 1px #ddd;
+}
+
+.movie-item__image-wrapper {
+  width: 270px;
+  height: 270px;
+  padding: 10px;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.movie-item__image {
+  max-height: 250px;
+  max-width: 250px;
+  vertical-align: middle;
+  /*overflow:hidden;*/
+}
+.movie-item__image:hover {
+  transform:scale(1.2, 1.1);
+}
+
+.movie-item__detail {
+  padding: 10px;
+  background-color: #fafafa;
+  border-top: solid 1px #ddd;
+}
+
+.movie-item__title {
+  margin: 0 auto;
+  height: 36px;
+  text-align: center;
+  overflow: hidden;
+}
+.movie-item__country {
+  text-align: center;
+}
+.movie-item__genre {
+  text-align: center;
+}
+.movie-item__rating {
+  text-align: center;
+  color: orange;
+}
+
+.movie-item__delete-wrapper {
+  margin-top: 5px;
+  text-align: right;
+}
+
+.movie-item__delete {
+  color: #dc3545;
+  background-color: transparent;
+  border-color: #dc3545;
+}
+.movie-item__delete:hover {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+.movie-item__delete:focus {
+  outline-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5);
+}
+
+/**
+ * -----------------
+ * 映画情報追加モーダル
+ * -----------------
+ */
+
+#add-movie__help {
+  display: none;
+}
+
+.custom-file-label::after {
+  content: "参照";
+}
+
+
+.text:{
+  text-align: left;
+}
+.text:hover{
+  text-decoration: none;
+}
+
+#add-movie-modal .rating {
+  color: #ccc;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+#add-movie-modal .rating.highlight {
+  color: orange;
+}
+
+
+
+
+/*レスポンシブル*/
+@media screen and (max-width: 480px) {
+  #login__submit-button {
+    width: 100%;
+  }
+  #login{
+    height: 100vh;
+    background-image: url(./images/county.jpg);
+    background-size: cover;
+  }
+  #cover {
+    width: 100%;
+    background-size: cover;
+  }
+  #cover__title {
+    text-align: center;
+    font-size: 36px;
+  }
+  .col-form-label {
+    text-align: center;
+  }
+
+
+}
+
+@media screen and (max-width : 1024px) {
+  #login__submit-button {
+    width: 100%;
+  }
+  .nav-item {
+    padding-left: 50px;
+  }
+}
+
+@media screen and (min-width : 1025px) {
+.nav-item {
+    padding-left: 200px;
+  }
+.top-logo {
+  margin-left: 50px;
+}  
+}
